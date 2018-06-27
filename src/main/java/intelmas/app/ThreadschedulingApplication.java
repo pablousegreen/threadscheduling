@@ -24,7 +24,7 @@ public class ThreadschedulingApplication {
 		SpringApplication.run(ThreadschedulingApplication.class, args);
 	}
 	
-	 @Bean
+	 /*@Bean
 	    public Executor asyncExecutor() {
 	        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 	        executor.setCorePoolSize(2);
@@ -33,6 +33,6 @@ public class ThreadschedulingApplication {
 	        executor.setThreadNamePrefix("GithubLookup-");
 	        executor.initialize();
 	        return executor;
-	    }
+	    }*/
 
 }
