@@ -16,4 +16,6 @@ public class MyThread implements Runnable {
 
         LOGGER.info("8000ALLNB_Called from thread....");
     }
+    
 }
+
