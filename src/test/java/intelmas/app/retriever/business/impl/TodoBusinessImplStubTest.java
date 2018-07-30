@@ -3,6 +3,7 @@ package intelmas.app.retriever.business.impl;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import intelmas.app.retriever.service.TodoService;
@@ -17,6 +18,8 @@ public class TodoBusinessImplStubTest {
 		List<String> todos = todoBusinessImpl
 				.retrieveTodosRelatedToSpring("Dummy");
 		assertEquals(2, todos.size());
+		Assert.assertNull("No concert date does not return null: "+ null, null);
+		Assert.assertEquals("Wrong value for concert in the past: "+2, 2L, 2);
 	}
 	
 	@Test
