@@ -49,7 +49,7 @@ public class ArneParser /*implements TopologyParserService*/ {
 //	@Autowired
 //	private NodesTypeRepository nodesTypeRepository;
 
-	@Value("${cassandra.insert.size}")
+//	///////////////@Value("${cassandra.insert.size}")
 	private int insertSize;
 	
 	private static final Logger LOG = LoggerFactory.getLogger(ArneParser.class);
