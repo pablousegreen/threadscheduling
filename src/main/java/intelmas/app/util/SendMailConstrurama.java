@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import org.json.JSONObject;
-
 public class SendMailConstrurama {	
 	
 	public static final String RED_CONSTRURAMA = "Unete a la Red Construrama";
@@ -145,51 +143,6 @@ public class SendMailConstrurama {
 			"</div>\r\n" + 
 			"</body>\r\n" + 
 			"</html>\r\n";
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public String buildingHTMLMail(String mailId, String data) {
-		String dataHtml = "document:{"+data+"}";
-		System.out.println("2000: "+dataHtml);
-		Map<String, String> variables = null;
-		try {
-//	        Object obj = new JSONParser().parse(dataHtml); 
-	        // typecasting obj to JSONObject 
-	        JSONObject jo = new JSONObject(dataHtml);  
-	        System.out.println("20001: "+jo);
-	        String nombre = (String) jo.get("nombre"); 
-	        System.out.println("nombre: "+nombre);
-	        String email = (String) jo.get("email");
-	        System.out.println("email: "+email);
-	        String comercializas = (String) jo.get("comercializas"); 
-	        System.out.println("comercializas: "+comercializas); 
-	        String ciudad = (String) jo.get("ciudad");
-	        System.out.println("ciudad: "+ciudad);
-	        String estado = (String) jo.get("estado"); 
-	        System.out.println("estado: "+estado); 
-	        String cp = (String) jo.get("cp");
-	        System.out.println("cp: "+cp);
-	        String telefono = (String) jo.get("telefono"); 
-	        System.out.println("telefono: "+telefono);
-	        String mensaje = (String) jo.get("mensaje");	          
-	        System.out.println("mensaje: "+mensaje); 
-	        variables = new HashMap<String, String>();
-	        variables.put("nombre", nombre);
-	        variables.put("email", email);
-	        variables.put("comercializas", comercializas);
-	        variables.put("ciudad", ciudad);
-	        variables.put("estado", estado);
-	        variables.put("cp", cp);
-	        variables.put("telefono", telefono);
-	        variables.put("mensaje", mensaje);
-	        getHTMLDocument(mailId, variables);
-		}catch(Exception ex) {
-			
-		}
-		return dataHtml;
-	}
 	
 	public String buildingHTMLMailArray(String mailId, String data) throws Exception {
 		String htmlDoc = "";
