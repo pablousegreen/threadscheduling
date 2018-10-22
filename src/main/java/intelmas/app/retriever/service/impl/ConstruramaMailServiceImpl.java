@@ -215,7 +215,7 @@ public class ConstruramaMailServiceImpl implements ConstruramaMailService{
 			} 
 		} 
 
-		public void SendEmailUsingGMailSMTP(final String to, final String cc, final String bcc, final String subject, final String body) throws Exception {
+		public void SendEmailUsingGMailSMTP(final String mailId, final String to, final String cc, final String bcc, final String subject, final String body) throws Exception {
 		      // Recipient's email ID needs to be mentioned.
 //		      String to = "xyz@gmail.com";//change accordingly
 			  App app = new App();
@@ -264,7 +264,7 @@ public class ConstruramaMailServiceImpl implements ConstruramaMailService{
 		         
 		         // Now set the actual message
 //		         System.out.println("200 BEFORE SEND MAIL BODY: "+app.buildingHTMLMailArray(body));
-		         message.setContent(app.buildingHTMLMailArray(body),"text/html; charset=utf-8");
+		         message.setContent(app.buildingHTMLMailArray(mailId, body),"text/html; charset=utf-8");
 
 		         // Send message
 		         Transport.send(message);

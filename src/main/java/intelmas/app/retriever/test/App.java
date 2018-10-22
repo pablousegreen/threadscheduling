@@ -1,6 +1,5 @@
 package intelmas.app.retriever.test;
 
-import java.io.FileReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,95 +9,148 @@ import org.json.JSONObject;
 
 public class App {	
 	
-	private String documentoParse = "<!doctype html>\r\n" + 
+	public static final String RED_CONSTRURAMA = "Unete a la Red Construrama";
+	public static final String CONTACTO_CONSTRURAMA="Contacto Construrama";
+	public static final String ID_CONTACT_CONSTRURAMA="contact";
+	public static final String ID_JOINUP_CONSTRURAMA="joinup";
+	
+	private String template;
+	
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+
+	private String base_document_joinup = "<!doctype html>\r\n" + 
 			"<html>\r\n" + 
 			"<head>\r\n" + 
 			"  <meta charset=\"utf-8\">\r\n" + 
-			"  <title>FrontConnections</title>\r\n" + 
+			"  <title></title>\r\n" + 
 			"  <base href=\"/\">\r\n" + 
 			"  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n" + 
-			"  <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\">\r\n" + 
 			"</head>\r\n" + 
-			"<body>\r\n" + 
-			"<style type='text/css'>\r\n" + 
-			".display4{\r\n" + 
-			"		font-size:800px;\r\n" + 
-			"	}\r\n" + 
-			".welcome {\r\n" + 
-			"	background: #DCDCDC;\r\n" + 
-			"	 width: 800px;\r\n" + 
-			"	 margin: 0 auto;\r\n" + 
-			"	 padding-top: 2rem;\r\n" + 
-			"}\r\n" + 
-			".welcome .titleCons{\r\n" + 
-			"	  background: linear-gradient(to right, #FF640C 50%, #FF640C 50%);\r\n" + 
-			"}\r\n" + 
+			"<body style=\"padding: 100px; background: #DCDCDC; height: 1000px;\">\r\n" + 
 			"\r\n" + 
-			".welcome .titleCons h1{\r\n" + 
-			"	color: #FFFFFF;\r\n" + 
-			"	font-weight: 400;\r\n" + 
-			"}\r\n" + 
-			"\r\n" + 
-			".welcome p {\r\n" + 
-			"	z-index: 100;\r\n" + 
-			"	font-weight: 400;\r\n" + 
-			"}\r\n" + 
-			"\r\n" + 
-			".welcome h2 {\r\n" + 
-			"	font-weight: 200;\r\n" + 
-			"}\r\n" + 
-			"</style>\r\n" + 
-			"<div class='container-fluid padding' style=\"padding: 100px; background: #DCDCDC;\">\r\n" + 
-			"	<div class='row welcome text-center' style=\text-align: center;  width: 800px; margin: 0 auto; padding-left: 2rem; position: relative;\">\r\n" + 
-			"		<div class='col-12 titleCons' style=\"background: #FF640C;\">\r\n" + 
-			"			<h1 class='display-4' style=\"font-size:300%; font-family:Arial, Helvetica, sans-serif; transform: translate(-50%, -50%);\">Unete a la Red Construrama.</h1>\r\n" + 
+			"<div class='container-fluid padding' style=\"width: 100%; padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto; \r\n" + 
+			"										padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px\">\r\n" + 
+			"	<div class='row welcome text-center'  style=\"background: #DCDCDC; width: 800px; margin: 0 auto; padding-top: 2rem;\">\r\n" + 
+			"		<div class='col-12 titleCons' style=\"padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; \r\n" + 
+			"										background: #FF640C;\">\r\n" + 
+			"			<h1 style=\"font-size:40px; text-align: center; font-family:Arial, Helvetica, sans-serif;\">$idtienda</h1>		\r\n" + 
 			"		</div>\r\n" + 
-			"		<div class='col-12'>\r\n" + 
-			"			<p class='lead'style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; left: 50%;\">NOMBRE*</p>\r\n" + 
-			"			<h2 class='lead' style=\"font-weight: 400; font-family:Arial, Helvetica, sans-serif; left: 50%;\">$nombre</h2>\r\n" + 
 			"		</div>\r\n" + 
-			"		<div class='col-12'>\r\n" + 
-			"			<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; left: 50%;\">CORREO ELECTRONICO*</p>\r\n" + 
-			"			<h2 class='lead' style=\"font-weight: 400; font-family:Arial, Helvetica, sans-serif; left: 50%;\">$email</h2>\r\n" + 
+			"			<hr class='my-4'></hr>\r\n" + 
 			"		</div>\r\n" + 
-			"		<div class='col-12'>\r\n" + 
-			"			<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; left: 50%;\">¿Actualmente ya comercializas material para la construcci&oacute;n?</p>\r\n" + 
-			"			<h2 class='lead' style=\"font-weight: 400; font-family:Arial, Helvetica, sans-serif; left: 50%;\">$comercializas</h2>\r\n" + 
-			"		</div>;\r\n" + 
-			"		<div class='col-12'>\r\n" + 
-			"			<p class='lead'style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; left: 50%;\">CUIDAD</p>\r\n" + 
-			"			<h2 class='lead' style=\"font-weight: 400; font-family:Arial, Helvetica, sans-serif; left: 50%;\">$ciudad</h2>\r\n" + 
-			"		</div>\r\n" + 
-			"		<div class='col-12'>\r\n" + 
-			"			<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; left: 50%;\">ESTADO</p>\r\n" + 
-			"			<h2 class='lead' style=\"font-weight: 400; font-family:Arial, Helvetica, sans-serif; left: 50%;\">$estado</h2>\r\n" + 
-			"		</div>\r\n" + 
-			"		<div class='col-12'>\r\n" + 
-			"			<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; left: 50%;\">C&Oacute;DIGO POSTAL</p>\r\n" + 
-			"			<h2 class='lead' style=\"font-weight: 400; font-family:Arial, Helvetica, sans-serif; left: 50%;\">$cp</h2>\r\n" + 
-			"		</div>\r\n" + 
-			"		<div class='col-12'>\r\n" + 
-			"			<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; left: 50%;\">TEL&Eacute;FONO</p>\r\n" + 
-			"			<h2 class='lead' style=\"font-weight: 400; font-family:Arial, Helvetica, sans-serif; left: 50%;\">$telefono</h2>\r\n" + 
-			"		</div>\r\n" + 
-			"		<div class='col-12'>\r\n" + 
-			"			<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; left: 50%;\">MENSAJE*</p>\r\n" + 
-			"			<h2 class='lead' style=\"font-weight: 400; font-family:Arial, Helvetica, sans-serif; left: 50%;\">$mensaje</h2>\r\n" + 
+			"		<div style=\"width: 1000px; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;\">\r\n" + 
+			"		\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">NOMBRE*</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 400; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$nombre</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">CORREO ELECTRONICO*</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$email</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">¿Actualmente ya comercializas material para la construcci&oacute;n?</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$comercializas</h2>\r\n" + 
+			"			</div>;\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">CUIDAD</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$ciudad</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">ESTADO</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$estado</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">C&Oacute;DIGO POSTAL</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$cp</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">TEL&Eacute;FONO</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$telefono</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">MENSAJE*</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$mensaje</h2>\r\n" + 
+			"			</div>\r\n" + 
 			"		</div>\r\n" + 
 			"		</div>\r\n" + 
 			"			<hr class='my-4'></hr>\r\n" + 
 			"	</div>\r\n" + 
-			"  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\r\n" + 
-			"	<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\"></script>\r\n" + 
-			"	<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\"></script>\r\n" + 
+			"	</div>\r\n" + 
+			"</div>\r\n" + 
 			"</body>\r\n" + 
-			"</html>";
+			"</html>\r\n";
+	
+	private String base_document_contact = "<!doctype html>\r\n" + 
+			"<html>\r\n" + 
+			"<head>\r\n" + 
+			"  <meta charset=\"utf-8\">\r\n" + 
+			"  <title>Construrama</title>\r\n" + 
+			"  <base href=\"/\">\r\n" + 
+			"  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n" + 
+			"</head>\r\n" + 
+			"<body style=\"padding: 100px; background: #DCDCDC; height: 1000px;\">\r\n" + 
+			"\r\n" + 
+			"<div class='container-fluid padding' style=\"width: 100%; padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto; \r\n" + 
+			"										padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px\">\r\n" + 
+			"	<div class='row welcome text-center'  style=\"background: #DCDCDC; width: 800px; margin: 0 auto; padding-top: 2rem;\">\r\n" + 
+			"		<div class='col-12 titleCons' style=\"padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; \r\n" + 
+			"										background: #FF640C;\">\r\n" + 
+			"			<h1 style=\"font-size:40px; text-align: center; font-family:Arial, Helvetica, sans-serif;\">$idtienda</h1>		\r\n" + 
+			"		</div>\r\n" + 
+			"		</div>\r\n" + 
+			"			<hr class='my-4'></hr>\r\n" + 
+			"		</div>\r\n" + 
+			"		<div style=\"width: 1000px; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;\">\r\n" + 
+			"		\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">NOMBRE*</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 400; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$nombre</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">CORREO ELECTRONICO*</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$email</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">TEL&Eacute;FONO</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$telefono</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">CUIDAD</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$ciudad</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">ESTADO</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$estado</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">Asunto</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$asunto</h2>\r\n" + 
+			"			</div>			\r\n" + 
+			"			<div class='col-12'>\r\n" + 
+			"				<p class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">MENSAJE*</p>\r\n" + 
+			"				<h2 class='lead' style=\"font-weight: 200; font-family:Arial, Helvetica, sans-serif; text-align: left;\">$mensaje</h2>\r\n" + 
+			"			</div>\r\n" + 
+			"		</div>\r\n" + 
+			"		</div>\r\n" + 
+			"			<hr class='my-4'></hr>\r\n" + 
+			"	</div>\r\n" + 
+			"	</div>\r\n" + 
+			"</div>\r\n" + 
+			"</body>\r\n" + 
+			"</html>\r\n";
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public String buildingHTMLMail(String data) {
+	public String buildingHTMLMail(String mailId, String data) {
 		String dataHtml = "document:{"+data+"}";
 		System.out.println("2000: "+dataHtml);
 		Map<String, String> variables = null;
@@ -132,14 +184,14 @@ public class App {
 	        variables.put("cp", cp);
 	        variables.put("telefono", telefono);
 	        variables.put("mensaje", mensaje);
-	        getHTMLDocument(variables);
+	        getHTMLDocument(mailId, variables);
 		}catch(Exception ex) {
 			
 		}
 		return dataHtml;
 	}
 	
-	public String buildingHTMLMailArray(String data) {
+	public String buildingHTMLMailArray(String mailId, String data) {
 		String htmlDoc = "";
 		String[] dataHtml = null;
 		Stream<String> stream = null;
@@ -157,55 +209,80 @@ public class App {
 						variables.put(var.substring(0, var.indexOf(":")), var.substring(var.indexOf(":")+1));
 				});
 			}
-			htmlDoc = getHTMLDocument(variables).toString();
+			htmlDoc = getHTMLDocument(mailId, variables).toString();
 		}catch(Exception ex) {
 			
 		}
 		return htmlDoc;
 	}
 	
-	public StringBuffer getHTMLDocument(Map<String, String> items) {
+	public StringBuffer getHTMLDocument(String mailId, Map<String, String> items) {
 		StringBuffer stringbuffer = new StringBuffer();
-//		  String newDocument = documentoParse;
-		 
+//		String newDocument = documentoParse;
+		System.out.println("20050 mailId: "+mailId);
+		if(mailId != null && mailId.equalsIgnoreCase(ID_CONTACT_CONSTRURAMA)) {
+			setTemplate(base_document_contact);
+//			base_document =base_document.replace("$idtienda", CONTACTO_CONSTRURAMA);
+			System.out.println("20050 SI ES : "+CONTACTO_CONSTRURAMA);
+			setTemplate(getTemplate().replace("$idtienda", CONTACTO_CONSTRURAMA));
+		}
+		if(mailId != null && mailId.equalsIgnoreCase(ID_JOINUP_CONSTRURAMA)) {
+			setTemplate(base_document_joinup);
+//			base_document =base_document.replace("$idtienda", RED_CONSTRURAMA);
+			System.out.println("20050 SI ES : "+RED_CONSTRURAMA);
+			setTemplate(getTemplate().replace("$idtienda", RED_CONSTRURAMA));
+		}
 		if(items!= null) {
-			items.forEach((k, v) ->{				
+			items.forEach((k, v) ->{	
 				if(k.indexOf("'nombre'")!=-1) {
 					System.out.println("20050: "+k + "value: "+v);
-					documentoParse =documentoParse.replace("$nombre", v);
+//					base_document =base_document.replace("$nombre", v);
+					setTemplate(getTemplate().replace("$nombre", v));
 				}
 				if(k.indexOf("'email'")!=-1) {
 					System.out.println("20050: "+k + "value: "+v);
-					documentoParse = documentoParse.replace("$email", v);
+//					base_document = base_document.replace("$email", v);
+					setTemplate(getTemplate().replace("$email", v));
 				}
-				if(k.indexOf("'comercializas'")!=-1) {
+				if(mailId.equals(ID_JOINUP_CONSTRURAMA) && k.indexOf("'comercializas'")!=-1) {
 					System.out.println("20050: "+k + "value: "+v);
-					documentoParse= documentoParse.replace("$comercializas", v);
+//					base_document= base_document.replace("$comercializas", v);
+					setTemplate(getTemplate().replace("$comercializas", v));
 				}
 				if(k.indexOf("'ciudad'")!=-1) {
 					System.out.println("20050: "+k + "value: "+v);
-					documentoParse = documentoParse.replace("$ciudad", v);
+//					base_document = base_document.replace("$ciudad", v);
+					setTemplate(getTemplate().replace("$ciudad", v));
 				}
 				if(k.indexOf("'estado'")!=-1) {
 					System.out.println("20050: "+k + "value: "+v);
-					documentoParse = documentoParse.replace("$estado", v);
+//					base_document = base_document.replace("$estado", v);
+					setTemplate(getTemplate().replace("$estado", v));
 				}
-				if(k.indexOf("'cp'")!=-1) {
+				if(mailId.equals(ID_JOINUP_CONSTRURAMA) && k.indexOf("'cp'")!=-1) {
 					System.out.println("20050: "+k + "value: "+v);
-					documentoParse= documentoParse.replace("$cp", v);
+//					base_document= base_document.replace("$cp", v);
+					setTemplate(getTemplate().replace("$cp", v));
 				}
 				if(k.indexOf("'telefono'")!=-1) {
 					System.out.println("20050: "+k + "value: "+v);
-					documentoParse= documentoParse.replace("$telefono", v);
+//					base_document= base_document.replace("$telefono", v);
+					setTemplate(getTemplate().replace("$telefono", v));
+				}
+				if(mailId.equals(ID_CONTACT_CONSTRURAMA) && k.indexOf("'asunto'")!=-1) {
+					System.out.println("20050: "+k + "value: "+v);
+//					base_document= base_document.replace("$asunto", v);
+					setTemplate(getTemplate().replace("$asunto", v));
 				}
 				if(k.indexOf("'mensaje'")!=-1) {
 					System.out.println("20050: "+k + "value: "+v);
-					documentoParse = documentoParse.replace("$mensaje", v);
+//					base_document = base_document.replace("$mensaje", v);
+					setTemplate(getTemplate().replace("$mensaje", v));
 				}
 			}); 
 		}
-		System.out.println(documentoParse);
-		stringbuffer.append(documentoParse);		
+		System.out.println(getTemplate());
+		stringbuffer.append(getTemplate());		
 		return stringbuffer;
 	}
 

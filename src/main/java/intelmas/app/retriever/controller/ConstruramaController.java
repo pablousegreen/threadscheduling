@@ -37,7 +37,7 @@ public class ConstruramaController {
 			if (dest != null && subject != null)
 			{
 //				construramaMailServiceImpl.sendMail(dest, cc, "", subject, body);
-				construramaMailServiceImpl.SendEmailUsingGMailSMTP("pablo.gonzalez@neoris.com", "", "", subject, body);
+				construramaMailServiceImpl.SendEmailUsingGMailSMTP(mailId, "pablo.gonzalez@neoris.com", "", "", subject, body);
 				System.out.println("POST POSITION TU SERVER SENDMAIL: {}"+ dateFormat.format(new Date()));
 				System.out.println("*******900: "+dest +" , subject: "+subject +"\n "+", body: "+body);
 				return true;

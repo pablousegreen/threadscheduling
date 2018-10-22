@@ -30,7 +30,7 @@ public class RetrieverScheduler {
 //	@Value("${retriever.fullscanperiod}")
 //	private int fullscanperiod;
 	
-	@Scheduled(fixedRate = 60000)
+	@Scheduled(fixedRate = 300000)
 	public void reportCurrentTime() {
 		LOG.info("The time is now {}", dateFormat.format(new Date()));
 	}
@@ -46,20 +46,20 @@ public class RetrieverScheduler {
 			 List<String> names = Arrays.asList("Peter", "Sam", "Greg", "Ryan");
 			 //Convert listnames to each row in User class and print them like a class User
 			 names.stream().filter(RetrieverScheduler:: isNotSam).map(User::new).forEach(user ->{
-				 LOG.info("6000_Name: "+ user.getName());
-				 LOG.info("6000_Age: "+user.getAge());
+//				 LOG.info("6000_Name: "+ user.getName());
+//				 LOG.info("6000_Age: "+user.getAge());
 			 });
 			 //Print each list item like String
 			 names.forEach(fileItem -> {
 					if(fileItem == null) return;
 					String filename = fileItem.replaceAll("Peter", "Pedro In Mexico");
-					LOG.info("6001_: filename: "+filename);
+//					LOG.info("6001_: filename: "+filename);
 				});
 			 processFile(names);
 		} catch (Exception e) {
 			LOG.info("General Exception when pooling the directory [Exception:{}]", e.toString());
 		} finally {
-			LOG.info("==> Finish Updating Directory Structure [Prefix:{}][Time:{} seconds][Collection:{}]");
+//			LOG.info("==> Finish Updating Directory Structure [Prefix:{}][Time:{} seconds][Collection:{}]");
 		}
 
 	}
@@ -76,8 +76,8 @@ public class RetrieverScheduler {
 		try{
 			if(names != null){
 				names.stream().map(User::new).forEach(user->{
-					LOG.debug("900_User: "+user.getName());
-					LOG.debug("901_Age: "+user.getAge());
+//					LOG.debug("900_User: "+user.getName());
+//					LOG.debug("901_Age: "+user.getAge());
 					
 				});
 			}

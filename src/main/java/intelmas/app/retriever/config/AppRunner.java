@@ -69,9 +69,9 @@ public class AppRunner implements CommandLineRunner {
     	System.out.println("Initial List :");
     	list.forEach(employee-> {
     		if(employee ==null) return;
-    		logger.info("4000_Name: "+ employee.getName());
-    		logger.info("4001_Id: "+employee.getId());
-    		logger.info("4002_Salary: "+employee.getSalary());
+//    		logger.info("4000_Name: "+ employee.getName());
+//    		logger.info("4001_Id: "+employee.getId());
+//    		logger.info("4002_Salary: "+employee.getSalary());
     		
     	});
     			
@@ -81,9 +81,9 @@ public class AppRunner implements CommandLineRunner {
     	System.out.println("\nStandard Sorted by Name :");
     	list.stream().forEach(employee->{
     		if(employee ==null) return;
-    		logger.info("4003_Name: "+ employee.getName());
-    		logger.info("4004_Id: "+employee.getId());
-    		logger.info("4005_Salary: "+employee.getSalary());
+//    		logger.info("4003_Name: "+ employee.getName());
+//    		logger.info("4004_Id: "+employee.getId());
+//    		logger.info("4005_Salary: "+employee.getSalary());
     	});
     	 
     	//lambdaSortByName already defined in above snippet
@@ -91,9 +91,9 @@ public class AppRunner implements CommandLineRunner {
     	System.out.println("\nLambda Sorted by Name :");
     	list.stream().forEach(employee->{
     		if(employee ==null) return;
-    		logger.info("4006_Name: "+ employee.getName());
-    		logger.info("4007_Id: "+employee.getId());
-    		logger.info("4008_Salary: "+employee.getSalary());
+//    		logger.info("4006_Name: "+ employee.getName());
+//    		logger.info("4007_Id: "+employee.getId());
+//    		logger.info("4008_Salary: "+employee.getSalary());
     	});
 //    	list.forEach(System.out::println);
     	 
@@ -104,9 +104,9 @@ public class AppRunner implements CommandLineRunner {
     	//list.forEach(System.out::println);
     	list.stream().forEach(employee->{
     		if(employee ==null) return;
-    		logger.info("4009_Name: "+ employee.getName());
-    		logger.info("4010_Id: "+employee.getId());
-    		logger.info("4011_Salary: "+employee.getSalary());
+//    		logger.info("4009_Name: "+ employee.getName());
+//    		logger.info("4010_Id: "+employee.getId());
+//    		logger.info("4011_Salary: "+employee.getSalary());
     	});
     }
     
