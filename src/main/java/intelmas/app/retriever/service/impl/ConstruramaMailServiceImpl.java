@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import intelmas.app.retriever.service.ConstruramaMailService;
-import intelmas.app.retriever.test.App;
+import intelmas.app.util.SendMailConstrurama;
 
 @Service
 public class ConstruramaMailServiceImpl implements ConstruramaMailService{
@@ -218,7 +218,7 @@ public class ConstruramaMailServiceImpl implements ConstruramaMailService{
 		public void SendEmailUsingGMailSMTP(final String mailId, final String to, final String cc, final String bcc, final String subject, final String body) throws Exception {
 		      // Recipient's email ID needs to be mentioned.
 //		      String to = "xyz@gmail.com";//change accordingly
-			  App app = new App();
+			  SendMailConstrurama app = new SendMailConstrurama();
 		      // Sender's email ID needs to be mentioned
 		      String from = "neorisqueretaroti@gmail.com";//change accordingly
 		      final String username = "neorisqueretaroti@gmail.com";//change accordingly

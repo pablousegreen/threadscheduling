@@ -1,4 +1,4 @@
-package intelmas.app.retriever.test;
+package intelmas.app.util;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import org.json.JSONObject;
 
-public class App {	
+public class SendMailConstrurama {	
 	
 	public static final String RED_CONSTRURAMA = "Unete a la Red Construrama";
 	public static final String CONTACTO_CONSTRURAMA="Contacto Construrama";
