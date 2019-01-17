@@ -18,13 +18,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Component
 public class AppRunner implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(AppRunner.class);
-
+    private static final String B2C_ROL = "construrama_b2c_mx_customer_group";
+	private static final String B2B_ROL = "construrama_b2b_mx_customer_group";
     private final GitHubLookupService gitHubLookupService;
+    boolean b2b = false;
+	boolean b2c = false;
 
     public AppRunner(GitHubLookupService gitHubLookupService) {
         this.gitHubLookupService = gitHubLookupService;
@@ -39,6 +44,8 @@ public class AppRunner implements CommandLineRunner {
         CompletableFuture<User> page1 = null;
         CompletableFuture<User> page2 = null;
         CompletableFuture<User> page3 = null;
+        
+        this.runLists();
         
         /*page1 = gitHubLookupService.findUser("PivotalSoftware");
         page2 = gitHubLookupService.findUser("CloudFoundry");
@@ -61,10 +68,14 @@ public class AppRunner implements CommandLineRunner {
     public void runLists(){
     	// Initial data
     	ArrayList<Employee> list = new ArrayList<Employee>();
-    	list.add(new Employee(500, "Shifoo", 150000));
-    	list.add(new Employee(504, "Oogway", 120000));
-    	list.add(new Employee(503, "Tigress", 100000));
-    	list.add(new Employee(730, "Mantis", 45000));
+    	list.add(new Employee(500, "Shifoo_B2C_customer", 150000));
+    	list.add(new Employee(504, "Oogway_B2B_customer", 120000));
+    	list.add(new Employee(503, "Tigress_B2C_customer", 100000));
+    	list.add(new Employee(730, "Mantis_B2B_customer", 45000));
+    	list.add(new Employee(850, "construrama_b2c_mx_customer_group", 400));
+    	list.add(new Employee(950, "construrama_b2b_mx_customer_group", 500));
+    	list.add(new Employee(850, "construramab2b", 400));
+    	list.add(new Employee(950, "construramab2c", 500));
     	 
     	System.out.println("Initial List :");
     	list.forEach(employee-> {
@@ -72,13 +83,24 @@ public class AppRunner implements CommandLineRunner {
 //    		logger.info("4000_Name: "+ employee.getName());
 //    		logger.info("4001_Id: "+employee.getId());
 //    		logger.info("4002_Salary: "+employee.getSalary());
-    		
+//    		if(("B2B").indexOf(employee.getName())!= -1) {
+//    			logger.info("50000 we have it: "+employee.getName().toLowerCase());
+//    			b2b = true;
+//    		}
+    		if((B2B_ROL).toLowerCase().indexOf("b2b")!=-1) {
+    			logger.info("60000 we have it: "+B2B_ROL);
+    			b2b = true;
+    		}
     	});
-    			
-    	 
+    		
+    	list.stream().filter(x->x.getName().toUpperCase().contains("B2B"))
+    	.collect(Collectors.toList()).stream().forEach(action->{
+    		System.out.println("100----Name Filter->: "+action.getName());
+    	});
+    	
     	//sortByName already defined in above snippet
     	Collections.sort(list, sortByName);
-    	System.out.println("\nStandard Sorted by Name :");
+//    	System.out.println("\nStandard Sorted by Name :");
     	list.stream().forEach(employee->{
     		if(employee ==null) return;
 //    		logger.info("4003_Name: "+ employee.getName());
@@ -100,7 +122,7 @@ public class AppRunner implements CommandLineRunner {
     	Comparator<Employee> lambdaSortById = (Employee e1, Employee e2) -> e1.getId() - e2.getId();
     	list.sort(lambdaSortById);
     	 
-    	System.out.println("\nSorted by Id :");
+//    	System.out.println("\nSorted by Id :");
     	//list.forEach(System.out::println);
     	list.stream().forEach(employee->{
     		if(employee ==null) return;
